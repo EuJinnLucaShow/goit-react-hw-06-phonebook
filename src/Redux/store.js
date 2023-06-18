@@ -1,24 +1,27 @@
-import { createStore } from "redux";
+import { createStore } from 'redux';
+import { devToolsEnhancer } from '@redux-devtools/extension';
 
 // Початкове значення стану Redux для кореневого редюсера,
 // якщо не передати параметр preloadedState.
-const initialState = {
-  tasks: [
-    { id: 0, text: "Learn HTML and CSS", completed: true },
-    { id: 1, text: "Get good at JavaScript", completed: true },
-    { id: 2, text: "Master React", completed: false },
-    { id: 3, text: "Discover Redux", completed: false },
-    { id: 4, text: "Build amazing apps", completed: false },
+const initialContacts = {
+  contacts: [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ],
   filters: {
-    status: "all",
+    status: 'all',
   },
 };
 
 // Поки що використовуємо редюсер який
 // тільки повертає отриманий стан
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state = initialContacts, action) => {
   return state;
 };
 
-export const store = createStore(rootReducer);
+// Створюємо розширення стора, щоб додати інструменти розробника
+const enhancer = devToolsEnhancer();
+
+export const store = createStore(rootReducer, enhancer);
