@@ -1,28 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { devToolsEnhancer } from '@redux-devtools/extension';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { contactsReducer } from './contactsSlice';
+import { filterReducer } from './filterSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist';
 
-// Початкове значення стану Redux для кореневого редюсера,
-// якщо не передати параметр preloadedState.
-const initialContacts = {
-  contacts: [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ],
-  filters: {
-    status: 'all',
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
+  version: 1,
+  whitelist: ['contacts'],
 };
 
-// Поки що використовуємо редюсер який
-// тільки повертає отриманий стан
-const rootReducer = (state = initialContacts, action) => {
-  return state;
-};
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({ contacts: contactsReducer, filter: filterReducer })
+);
 
-// Створюємо розширення стора, щоб додати інструменти розробника
-const enhancer = devToolsEnhancer();
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
 
-export const store = configureStore({ reducer: rootReducer, enhancer });
-// The store now has redux-thunk added and the Redux DevTools Extension is turned on
+export const persistor = persistStore(store);

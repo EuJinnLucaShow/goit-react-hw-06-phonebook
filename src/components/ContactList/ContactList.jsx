@@ -1,14 +1,26 @@
-import React from 'react';
-import ContactItem from '../ContactItem/ContactItem'
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
+import ContactItem from '../ContactItem/ContactItem';
 
-function ContactList({ contacts, deleteContact }) {
+const getFilteredContacts = (contacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter)
+  );
+};
+
+function ContactList() {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  const filteredContacts = getFilteredContacts(contacts, filter);
+
   return (
     <ul>
-      {contacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} deleteContact={deleteContact} />
+      {filteredContacts.map(({ id, name, number }) => (
+        <ContactItem key={id} contact={{ id, name, number }} />
       ))}
     </ul>
   );
 }
 
-export default ContactList
+export default ContactList;
