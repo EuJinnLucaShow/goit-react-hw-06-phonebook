@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { devToolsEnhancer } from '@redux-devtools/extension';
 
 // Початкове значення стану Redux для кореневого редюсера,
@@ -24,4 +24,5 @@ const rootReducer = (state = initialContacts, action) => {
 // Створюємо розширення стора, щоб додати інструменти розробника
 const enhancer = devToolsEnhancer();
 
-export const store = createStore(rootReducer, enhancer);
+export const store = configureStore({ reducer: rootReducer, enhancer });
+// The store now has redux-thunk added and the Redux DevTools Extension is turned on
