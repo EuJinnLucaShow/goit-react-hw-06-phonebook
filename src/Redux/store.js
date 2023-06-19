@@ -8,7 +8,7 @@ const persistConfig = {
   key: 'root',
   storage,
   // version: 1,
-  whitelist: ['contacts'],
+  // whitelist: ['contacts'],
 };
 
 const persistedReducer = persistReducer(
