@@ -45,7 +45,11 @@ function ContactForm() {
     );
 
     if (isNumberExist) {
-      alert(`Number ${number} is already in contacts`);
+      Notiflix.Report.warning(
+        'Alert',
+        `Number ${number} is already in contacts!`,
+        'Ok'
+      );
       return;
     }
 
