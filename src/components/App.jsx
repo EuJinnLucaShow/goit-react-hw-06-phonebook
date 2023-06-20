@@ -8,7 +8,6 @@ function App() {
     <Container>
       <Title>Phonebook📱</Title>
       <ContactForm />
-
       <Heading2>Contacts</Heading2>
       <Filter />
       <ContactList />
