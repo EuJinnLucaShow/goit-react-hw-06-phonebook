@@ -52,14 +52,10 @@ const contactsSlice = createSlice({
 
     deleteAllContacts: state => {
       state.splice(0, state.length);
-    },
-
-    sortContacts: state => {
-      state.sort((a, b) => a.name.localeCompare(b.name));
-    },
+    },    
   },
 });
 
-export const { addContact, deleteContact, deleteAllContacts, sortContacts } =
+export const { addContact, deleteContact, deleteAllContacts } =
   contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
