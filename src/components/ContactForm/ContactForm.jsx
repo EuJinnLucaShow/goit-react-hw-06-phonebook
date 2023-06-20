@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../store/contactsSlice';
 
 import { ReactComponent as AddIcon } from '../icons/plus-user.svg';
 import { Form, Input, Text, Button } from './ContactForm.styled';
