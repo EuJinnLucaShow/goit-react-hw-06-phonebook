@@ -1,7 +1,19 @@
+import { useDispatch } from 'react-redux';
+import { addContact } from './redux/contactsSlice';
+
 import { ReactComponent as AddIcon } from '../icons/plus-user.svg';
 import { Form, Input, Text, Button } from './ContactForm.styled';
 
-function ContactForm({ handleSubmit }) {
+function ContactForm() {
+  const dispatch = useDispatch();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.target;
+    dispatch(addContact(form.elements.name.value, form.elements.number.value));
+    form.reset();
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Text>Name</Text>
