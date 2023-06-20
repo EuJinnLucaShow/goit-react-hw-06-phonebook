@@ -18,19 +18,19 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   > svg {
-  width:40px;
-  height:30px;
-}
+    width: 40px;
+    height: 30px;
+  }
   /* padding: 10px 20px; */
   margin-top: 5px;
   font-size: 14px;
   border-radius: 6px;
   border: 1px solid;
-    :hover {
+  :hover {
     background-color: #e0e0e0;
     > svg {
-  fill: #00b02f;
-}
+      fill: #00b02f;
+    }
   }
 `;
 
